@@ -1,0 +1,304 @@
+/**
+ * BattleEffectsScreen - 戦闘エフェクト用CSS
+ * 暗転・テキスト演出等の全画面エフェクトレイヤー
+ */
+
+/* ========================================
+ * ルートコンテナ
+ * #ui-layer > * { pointer-events: auto } を上書きするため詳細度を上げる
+ * ======================================== */
+#ui-layer > #battle-effects-root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: var(--z-effects);
+}
+
+/* ========================================
+ * 暗転オーバーレイ
+ * ======================================== */
+.battle-effects__darken {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  opacity: 0;
+}
+
+.battle-effects__darken--active {
+  opacity: 0.8;
+  pointer-events: auto;
+}
+
+.battle-effects__darken--fadeout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+/* ========================================
+ * BATTLE START テキスト
+ * ======================================== */
+.battle-effects__battle-start-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-family: var(--font-display);
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: bold;
+  white-space: nowrap;
+  color: #ffffff;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.8),
+    0 0 40px rgba(255, 255, 255, 0.4),
+    2px 2px 4px #000000,
+    -1px -1px 3px #000000;
+  opacity: 0;
+  pointer-events: none;
+  animation: battleStartText 1450ms ease-out forwards;
+}
+
+@keyframes battleStartText {
+  /* スケールイン: 0→300ms */
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  20.7% {
+    /* 300ms */
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  /* バウンス: 300→450ms */
+  31% {
+    /* 450ms */
+    transform: translate(-50%, -50%) scale(1.0);
+  }
+  /* 表示維持: 450→1050ms */
+  72.4% {
+    /* 1050ms */
+    transform: translate(-50%, -50%) scale(1.0);
+    opacity: 1;
+  }
+  /* フェードアウト: 1050→1450ms */
+  100% {
+    transform: translate(-50%, -50%) scale(1.0);
+    opacity: 0;
+  }
+}
+
+/* ========================================
+ * テキスト演出エリア（スキルテキスト等）
+ * ======================================== */
+.battle-effects__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* --- 味方スキル発動テキスト --- */
+.text-overlay__skill-activation {
+  position: absolute;
+  font-family: 'Kaisei Opti', serif;
+  font-size: 48px;
+  font-weight: bold;
+  text-shadow:
+    0 0 20px var(--skill-glow-color, #ffffff),
+    0 0 40px var(--skill-glow-color, #ffffff),
+    2px 2px 4px #000000,
+    -1px -1px 3px #000000;
+  animation: skillActivation 1300ms ease-out forwards;
+}
+
+@keyframes skillActivation {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  15% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  23% {
+    transform: scale(1.0);
+  }
+  62% {
+    transform: scale(1.0) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.0) translateY(-40px);
+    opacity: 0;
+  }
+}
+
+/* --- 敵スキル発動テキスト --- */
+.text-overlay__enemy-skill {
+  position: absolute;
+  font-family: 'Kaisei Opti', serif;
+  font-size: 42px;
+  font-weight: bold;
+  text-shadow:
+    2px 2px 4px #000000,
+    -1px -1px 3px #000000;
+  animation: enemySkillText 1000ms ease-out forwards;
+}
+
+@keyframes enemySkillText {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  12% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1.0);
+  }
+  65% {
+    transform: scale(1.0) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.0) translateY(-30px);
+    opacity: 0;
+  }
+}
+
+/* --- 対象なしテキスト --- */
+.text-overlay__no-target {
+  position: absolute;
+  font-family: 'Kaisei Opti', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #aaaaaa;
+  text-shadow:
+    2px 2px 3px #000000,
+    -1px -1px 2px #000000;
+  animation: noTargetText 1100ms ease-out forwards;
+}
+
+@keyframes noTargetText {
+  0% {
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  68% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --- アクション効果テキスト (ATTACK! / HEAL!) --- */
+.text-overlay__action-effect {
+  position: absolute;
+  font-family: 'Kaisei Opti', serif;
+  font-size: 42px;
+  font-weight: bold;
+  text-shadow:
+    2px 2px 4px #000000,
+    -1px -1px 3px #000000;
+  animation: actionEffectText 1050ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 1050ms = 150(スケールイン) + 100(バウンス) + 300(維持) + 500(フェードアウト) */
+@keyframes actionEffectText {
+  /* スケールイン: 0→150ms (14.3%) */
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  14.3% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  /* バウンス: 150→250ms (23.8%) */
+  23.8% {
+    transform: scale(1.0);
+  }
+  /* 表示維持: 250→550ms (52.4%) */
+  52.4% {
+    transform: scale(1.0) translateY(0);
+    opacity: 1;
+  }
+  /* フェードアウト+上方移動: 550→1050ms (100%) */
+  100% {
+    transform: scale(1.0) translateY(-30px);
+    opacity: 0;
+  }
+}
+
+/* --- チェインテキスト (CHAIN xN) --- */
+.text-overlay__chain {
+  position: absolute;
+  font-family: 'Kaisei Opti', serif;
+  font-size: 52px;
+  font-weight: bold;
+  color: var(--text-accent);
+  text-shadow:
+    2px 2px 4px #000000,
+    -1px -1px 3px #000000;
+  animation: chainText 1150ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 背景グロー効果 */
+.text-overlay__chain::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%);
+  opacity: 0.25;
+  z-index: -1;
+}
+
+/* 1150ms = 150(スケールイン) + 100(バウンス) + 400(維持) + 500(フェードアウト) */
+@keyframes chainText {
+  /* スケールイン: 0→150ms (13.0%) */
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  13.0% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  /* バウンス: 150→250ms (21.7%) */
+  21.7% {
+    transform: scale(1.0);
+  }
+  /* 表示維持: 250→650ms (56.5%) */
+  56.5% {
+    transform: scale(1.0) translateY(0);
+    opacity: 1;
+  }
+  /* フェードアウト+上方移動: 650→1150ms (100%) */
+  100% {
+    transform: scale(1.0) translateY(-30px);
+    opacity: 0;
+  }
+}

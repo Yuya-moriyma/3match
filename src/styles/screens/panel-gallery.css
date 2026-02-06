@@ -1,0 +1,385 @@
+/**
+ * PanelGalleryScreen - パネル確認画面スタイル
+ */
+
+/* ========================================
+ * コンテナ
+ * ======================================== */
+.panel-gallery-screen__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* screen-body のストレッチ */
+.panel-gallery-screen .screen-body {
+  align-items: stretch;
+}
+
+/* ボディ内部 */
+.panel-gallery-screen__body-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px;
+  padding-bottom: 48px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+/* ========================================
+ * セクション
+ * ======================================== */
+.panel-gallery-screen__section {
+  width: 100%;
+  text-align: center;
+}
+
+.panel-gallery-screen__section-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-parchment);
+  font-style: italic;
+  margin: 0 0 8px 0;
+}
+
+.panel-gallery-screen__section-divider {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+  margin: 8px auto 20px;
+  width: 60%;
+}
+
+/* ========================================
+ * 装備アイコングリッド
+ * ======================================== */
+.panel-gallery-screen__equip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 4px;
+}
+
+/* ========================================
+ * 装備アイコンカード（battle-prep.cssと同じスタイル）
+ * ======================================== */
+.panel-gallery-screen__equip-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-parchment-dark);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  aspect-ratio: 1;
+  justify-content: center;
+}
+
+.panel-gallery-screen__equip-icon:hover {
+  background: var(--color-parchment-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.panel-gallery-screen__equip-icon-symbol {
+  font-size: 32px;
+  color: var(--color-accent-dark);
+}
+
+/* レア度別アイコン色 - リアル金属グラデーション */
+.panel-gallery-screen__equip-icon--rarity-1 .panel-gallery-screen__equip-icon-symbol {
+  color: #8b5a2b;
+  filter: drop-shadow(1px 1px 1px rgba(92, 51, 23, 0.5));
+}
+
+.panel-gallery-screen__equip-icon--rarity-2 .panel-gallery-screen__equip-icon-symbol {
+  background: var(--metal-silver-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(1px 1px 1px rgba(80, 80, 80, 0.5));
+}
+
+.panel-gallery-screen__equip-icon--rarity-3 .panel-gallery-screen__equip-icon-symbol {
+  background: var(--metal-gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(1px 1px 1px rgba(139, 105, 20, 0.5));
+}
+
+/* レア度別パネル枠線は components.css の .equip-panel--rarity-* を使用 */
+
+.panel-gallery-screen__equip-icon-name {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ========================================
+ * キャラクターカードリスト
+ * ======================================== */
+.panel-gallery-screen__character-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* ========================================
+ * キャラクターカード（battle-prep.cssと同じスタイル）
+ * ======================================== */
+.panel-gallery-screen__character-card {
+  position: relative;
+  width: calc(50% - 8px);
+  min-width: 180px;
+  max-width: 200px;
+  padding: 20px 16px;
+  background: var(--color-parchment-light);
+  border: 3px solid var(--color-parchment-dark);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.panel-gallery-screen__character-card:hover {
+  background: var(--color-parchment-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.panel-gallery-screen__card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.panel-gallery-screen__card-stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.panel-gallery-screen__card-stat {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+
+.panel-gallery-screen__card-stat--attack {
+  color: #8b2020;
+  background: #f8e0e0;
+  border: 1px solid #e0b0b0;
+}
+
+.panel-gallery-screen__card-stat--heal {
+  color: #1a6b2a;
+  background: #e0f0e4;
+  border: 1px solid #b0d0b8;
+}
+
+.panel-gallery-screen__card-skill-name {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-accent-dark);
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.panel-gallery-screen__card-skill-desc {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+  min-height: 3em;
+}
+
+.panel-gallery-screen__card-cost {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-parchment-dark);
+}
+
+/* ========================================
+ * モーダル
+ * ======================================== */
+.panel-gallery-screen__modal-dialog {
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.panel-gallery-screen__modal-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  font-style: italic;
+  margin: 0 0 8px 0;
+}
+
+.panel-gallery-screen__modal-divider {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+  margin: 8px auto 24px;
+  width: 50%;
+}
+
+/* ========================================
+ * 装備品詳細
+ * ======================================== */
+.panel-gallery-screen__equip-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-parchment-dark);
+  border-radius: var(--border-radius-md);
+}
+
+.panel-gallery-screen__equip-detail-icon {
+  font-size: 64px;
+  color: var(--color-accent-dark);
+}
+
+/* レア度別アイコン色は components.css の .equip-icon--rarity-* を使用 */
+
+.panel-gallery-screen__equip-detail-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0;
+}
+
+/* レア度バッジは components.css の .equip-rarity-badge を使用 */
+
+.panel-gallery-screen__equip-detail-effect {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-accent-dark);
+  font-weight: bold;
+  margin: 8px 0 0 0;
+}
+
+/* ========================================
+ * キャラクター詳細
+ * ======================================== */
+.panel-gallery-screen__char-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-parchment-dark);
+  border-radius: var(--border-radius-md);
+}
+
+.panel-gallery-screen__char-detail-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0;
+}
+
+.panel-gallery-screen__char-detail-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.panel-gallery-screen__char-detail-skill {
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-parchment-dark);
+  width: 100%;
+}
+
+.panel-gallery-screen__char-detail-skill-name {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-accent-dark);
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.panel-gallery-screen__char-detail-skill-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  line-height: 1.6;
+}
+
+.panel-gallery-screen__char-detail-cost {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0;
+}
+
+.panel-gallery-screen__modal-close {
+  margin-top: 8px;
+}
+
+/* ========================================
+ * レスポンシブ対応
+ * ======================================== */
+@media (max-width: 480px) {
+  .panel-gallery-screen__equip-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .panel-gallery-screen__character-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  .panel-gallery-screen__character-list {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

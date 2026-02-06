@@ -1,0 +1,1048 @@
+/**
+ * 共通UIコンポーネントスタイル
+ * Bootstrap をベースにカスタマイズ
+ */
+
+/* ========================================
+ * 巻物風ボタン
+ * ======================================== */
+.btn-scroll {
+  position: relative;
+  padding: 12px 40px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-parchment-light) 0%,
+    var(--color-parchment) 50%,
+    var(--color-parchment-dark) 100%
+  );
+  border: 2px solid var(--color-accent);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow:
+    var(--shadow-medium),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-scroll:hover {
+  background: linear-gradient(
+    to bottom,
+    var(--color-parchment) 0%,
+    var(--color-parchment-dark) 100%
+  );
+  box-shadow:
+    var(--shadow-heavy),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-scroll:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-light);
+}
+
+/* ========================================
+ * アクセントボタン
+ * ======================================== */
+.btn-accent {
+  padding: 12px 32px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 50%,
+    var(--color-accent-dark) 100%
+  );
+  border: 2px solid var(--color-accent-dark);
+  border-radius: var(--border-radius-md);
+  color: var(--text-light);
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: var(--shadow-medium);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-accent:hover {
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent) 0%,
+    var(--color-accent-dark) 100%
+  );
+  box-shadow: var(--shadow-heavy);
+  transform: translateY(-2px);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-light);
+}
+
+/* ========================================
+ * 羊皮紙パネル
+ * ======================================== */
+.panel-parchment {
+  background: linear-gradient(
+    135deg,
+    var(--color-parchment-light) 0%,
+    var(--color-parchment) 50%,
+    var(--color-parchment-dark) 100%
+  );
+  border: 3px solid var(--color-accent);
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
+  box-shadow:
+    var(--shadow-heavy),
+    var(--shadow-parchment);
+}
+
+/* ========================================
+ * 装飾フレーム
+ * ======================================== */
+.decorative-frame {
+  position: relative;
+  border: 4px double var(--color-accent);
+  border-radius: var(--border-radius-lg);
+  padding: 8px;
+}
+
+.decorative-frame::before,
+.decorative-frame::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-accent);
+}
+
+.decorative-frame::before {
+  top: -4px;
+  left: -4px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.decorative-frame::after {
+  bottom: -4px;
+  right: -4px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ========================================
+ * 区切り線
+ * ======================================== */
+.divider-ornate {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 16px 0;
+  color: var(--color-accent);
+}
+
+.divider-ornate::before,
+.divider-ornate::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+}
+
+.divider-ornate span {
+  padding: 0 16px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+/* ========================================
+ * タイトルテキスト
+ * ======================================== */
+.title-display {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  text-shadow:
+    1px 1px 0 var(--color-parchment-light),
+    2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.title-accent {
+  font-family: var(--font-display);
+  color: var(--color-accent-light);
+  text-shadow:
+    1px 1px 0 var(--color-accent-dark),
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+ * スクリーン共通レイアウト
+ * ======================================== */
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========================================
+ * スクリーンヘッダー（戻るボタン + タイトル）
+ * ======================================== */
+.screen-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 48px;
+  flex-shrink: 0;
+}
+
+.screen-header__back {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.screen-header__title {
+  position: relative;
+  padding: 16px 48px;
+  border: 4px double var(--color-accent);
+  border-radius: var(--border-radius-lg);
+  background: rgba(0, 0, 0, 0.3);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0;
+  text-shadow:
+    2px 2px 0 var(--color-accent-dark),
+    3px 3px 6px rgba(0, 0, 0, 0.5);
+  letter-spacing: 4px;
+}
+
+.screen-header__title::before,
+.screen-header__title::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-accent);
+}
+
+.screen-header__title::before {
+  top: -4px;
+  left: -4px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.screen-header__title::after {
+  bottom: -4px;
+  right: -4px;
+  border-left: none;
+  border-top: none;
+}
+
+@media (max-width: 480px) {
+  .screen-header__title {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+  }
+}
+
+/* ========================================
+ * スクリーンボディ（メインコンテンツ領域）
+ * ======================================== */
+.screen-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* ========================================
+ * アニメーション
+ * ======================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) ease forwards;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp var(--transition-normal) ease forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+ * UI Button Component
+ * ======================================== */
+.ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.ui-btn:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 2px;
+}
+
+/* Button Variants */
+.ui-btn--scroll {
+  background: linear-gradient(
+    to bottom,
+    var(--color-parchment-light) 0%,
+    var(--color-parchment) 50%,
+    var(--color-parchment-dark) 100%
+  );
+  border: 2px solid var(--color-accent);
+  color: var(--text-primary);
+  box-shadow:
+    var(--shadow-medium),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ui-btn--scroll:hover:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    var(--color-parchment) 0%,
+    var(--color-parchment-dark) 100%
+  );
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-heavy);
+}
+
+.ui-btn--scroll:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-light);
+}
+
+.ui-btn--accent {
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 50%,
+    var(--color-accent-dark) 100%
+  );
+  border: 2px solid var(--color-accent-dark);
+  color: var(--text-light);
+  box-shadow: var(--shadow-medium);
+}
+
+.ui-btn--accent:hover:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent) 0%,
+    var(--color-accent-dark) 100%
+  );
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-heavy);
+}
+
+.ui-btn--accent:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-light);
+}
+
+.ui-btn--outline {
+  background: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.ui-btn--outline:hover:not(:disabled) {
+  background: rgba(139, 69, 19, 0.1);
+  transform: translateY(-2px);
+}
+
+.ui-btn--outline:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Ribbon Style Button - メインボタンスタイル */
+.ui-btn--ribbon {
+  position: relative;
+  padding: 12px 40px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 50%,
+    var(--color-accent-dark) 100%
+  );
+  border: none;
+  color: var(--text-light);
+  clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ui-btn--ribbon:hover:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent) 0%,
+    var(--color-accent-dark) 100%
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.ui-btn--ribbon:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Ribbon Secondary - 羊皮紙色のリボンボタン */
+.ui-btn--ribbon-secondary {
+  position: relative;
+  padding: 12px 40px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-parchment-light) 0%,
+    var(--color-parchment) 50%,
+    var(--color-parchment-dark) 100%
+  );
+  border: none;
+  color: var(--text-primary);
+  clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ui-btn--ribbon-secondary:hover:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    var(--color-parchment) 0%,
+    var(--color-parchment-dark) 100%
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.ui-btn--ribbon-secondary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ui-btn--icon {
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: var(--color-accent);
+  border-radius: 50%;
+}
+
+.ui-btn--icon:hover:not(:disabled) {
+  background: rgba(139, 69, 19, 0.1);
+}
+
+/* Icon Diamond - 正方形ひし形のアイコンボタン（プライマリデザイン） */
+.ui-btn--icon-diamond {
+  width: 44px;
+  height: 44px;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 50%,
+    var(--color-accent-dark) 100%
+  );
+  border: none;
+  color: var(--text-light);
+  transform: rotate(45deg);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.ui-btn--icon-diamond .ui-btn__icon {
+  transform: rotate(-45deg);
+  font-size: 1.25rem;
+}
+
+.ui-btn--icon-diamond:hover:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent) 0%,
+    var(--color-accent-dark) 100%
+  );
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.ui-btn--icon-diamond:active:not(:disabled) {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Button Sizes */
+.ui-btn--sm {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+.ui-btn--md {
+  padding: 12px 24px;
+  font-size: 1rem;
+}
+
+.ui-btn--lg {
+  padding: 16px 32px;
+  font-size: 1.125rem;
+}
+
+/* Button States */
+.ui-btn--disabled,
+.ui-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.ui-btn--loading {
+  position: relative;
+  color: transparent;
+}
+
+.ui-btn__spinner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.ui-btn__icon {
+  font-size: 1.25em;
+}
+
+/* ========================================
+ * UI Panel Component
+ * ======================================== */
+.ui-panel {
+  position: relative;
+  padding: 24px;
+  border-radius: var(--border-radius-lg);
+}
+
+.ui-panel--parchment {
+  background: linear-gradient(
+    135deg,
+    var(--color-parchment-light) 0%,
+    var(--color-parchment) 50%,
+    var(--color-parchment-dark) 100%
+  );
+  border: 3px solid var(--color-accent);
+  box-shadow:
+    var(--shadow-heavy),
+    var(--shadow-parchment);
+}
+
+.ui-panel--dark {
+  background: linear-gradient(
+    to bottom,
+    var(--color-background-gradient-top) 0%,
+    var(--color-background) 50%,
+    var(--color-background-gradient-bottom) 100%
+  );
+  border: 2px solid var(--color-border);
+  color: var(--text-light);
+  box-shadow: var(--shadow-heavy);
+}
+
+.ui-panel--transparent {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Decorated Panel */
+.ui-panel--decorated {
+  border: 4px double var(--color-accent);
+}
+
+.ui-panel--decorated::before,
+.ui-panel--decorated::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-accent);
+}
+
+.ui-panel--decorated::before {
+  top: 4px;
+  left: 4px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.ui-panel--decorated::after {
+  bottom: 4px;
+  right: 4px;
+  border-left: none;
+  border-top: none;
+}
+
+.ui-panel__header {
+  margin-bottom: 16px;
+}
+
+.ui-panel__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.ui-panel--dark .ui-panel__title {
+  color: var(--text-light);
+}
+
+.ui-panel__divider {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+}
+
+.ui-panel__content {
+  color: var(--text-primary);
+}
+
+.ui-panel--dark .ui-panel__content {
+  color: var(--text-light);
+}
+
+/* ========================================
+ * UI Modal Component
+ * ======================================== */
+.ui-modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.ui-modal__overlay--visible {
+  opacity: 1;
+}
+
+.ui-modal__dialog {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  transform: scale(0.9) translateY(20px);
+  transition: transform var(--transition-normal);
+}
+
+.ui-modal__dialog--visible {
+  transform: scale(1) translateY(0);
+}
+
+.ui-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.ui-modal__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ui-modal__close {
+  margin-left: auto;
+}
+
+.ui-modal__body {
+  margin-bottom: 16px;
+}
+
+.ui-modal__message {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.ui-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-parchment-dark);
+}
+
+/* ========================================
+ * UI Decorative Elements
+ * ======================================== */
+.ui-decorative-frame {
+  position: relative;
+  padding: 16px;
+  border: 4px double var(--color-accent);
+  border-radius: var(--border-radius-lg);
+}
+
+.ui-decorative-frame__corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--color-accent);
+}
+
+.ui-decorative-frame__corner--tl {
+  top: -6px;
+  left: -6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.ui-decorative-frame__corner--tr {
+  top: -6px;
+  right: -6px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.ui-decorative-frame__corner--bl {
+  bottom: -6px;
+  left: -6px;
+  border-right: none;
+  border-top: none;
+}
+
+.ui-decorative-frame__corner--br {
+  bottom: -6px;
+  right: -6px;
+  border-left: none;
+  border-top: none;
+}
+
+.ui-decorative-frame__content {
+  position: relative;
+}
+
+/* Ornate Divider */
+.ui-ornate-divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.ui-ornate-divider__line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+}
+
+.ui-ornate-divider__ornament,
+.ui-ornate-divider__symbol {
+  padding: 0 16px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-accent);
+}
+
+/* Simple Divider */
+.ui-simple-divider {
+  border: none;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.5;
+  margin: 16px 0;
+}
+
+/* Title Banner */
+.ui-title-banner {
+  text-align: center;
+  padding: 24px;
+}
+
+.ui-title-banner__title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--text-light);
+  margin: 0 0 8px 0;
+  text-shadow:
+    2px 2px 0 var(--color-accent-dark),
+    4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.ui-title-banner__subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-accent-light);
+  margin: 0;
+}
+
+/* Scroll Container */
+.ui-scroll-container {
+  position: relative;
+}
+
+.ui-scroll-container__top,
+.ui-scroll-container__bottom {
+  height: 20px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent) 0%,
+    var(--color-accent-dark) 100%
+  );
+  border-radius: var(--border-radius-sm);
+}
+
+.ui-scroll-container__content {
+  background: var(--color-parchment);
+  padding: 16px;
+  min-height: 100px;
+}
+
+/* Icon Badge */
+.ui-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-parchment);
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.ui-icon-badge--gold {
+  background: var(--metal-gold-gradient);
+  border-color: var(--metal-gold-border);
+  color: #5c4300;
+  box-shadow: var(--metal-gold-shadow);
+}
+
+.ui-icon-badge--silver {
+  background: var(--metal-silver-gradient);
+  border-color: var(--metal-silver-border);
+  color: #404040;
+  box-shadow: var(--metal-silver-shadow);
+}
+
+.ui-icon-badge--bronze {
+  background: linear-gradient(135deg, #cd7f32, #a0522d);
+  border-color: #8b4513;
+  color: #3d1e00;
+}
+
+/* Status Indicator */
+.ui-status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.ui-status-indicator--success {
+  background: var(--color-success);
+  box-shadow: 0 0 4px var(--color-success);
+}
+
+.ui-status-indicator--warning {
+  background: var(--color-warning);
+  box-shadow: 0 0 4px var(--color-warning);
+}
+
+.ui-status-indicator--danger {
+  background: var(--color-danger);
+  box-shadow: 0 0 4px var(--color-danger);
+}
+
+.ui-status-indicator--info {
+  background: var(--color-accent);
+  box-shadow: 0 0 4px var(--color-accent);
+}
+
+/* ========================================
+ * 装備品レア度バッジ
+ * ======================================== */
+.equip-rarity-badge {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 12px;
+  border-radius: 12px;
+}
+
+/* Common - マットな茶色 */
+.equip-rarity-badge--1 {
+  background: #8b5a2b;
+  color: #fff8f0;
+  border: 1px solid #5c3a1a;
+}
+
+/* Rare - メタリックシルバー */
+.equip-rarity-badge--2 {
+  background: var(--metal-silver-gradient);
+  color: #303030;
+  box-shadow: var(--metal-silver-shadow);
+  border: 1px solid var(--metal-silver-border);
+}
+
+/* S Rare - メタリックゴールド */
+.equip-rarity-badge--3 {
+  background: var(--metal-gold-gradient);
+  color: #5c4300;
+  box-shadow: var(--metal-gold-shadow);
+  border: 1px solid var(--metal-gold-border);
+}
+
+/* ========================================
+ * 装備品レア度別アイコン色
+ * ======================================== */
+.equip-icon--rarity-1 {
+  color: #8b5a2b;
+  filter: drop-shadow(1px 1px 1px rgba(92, 51, 23, 0.5));
+}
+
+.equip-icon--rarity-2 {
+  background: var(--metal-silver-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(1px 1px 1px rgba(80, 80, 80, 0.5));
+}
+
+.equip-icon--rarity-3 {
+  background: var(--metal-gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(1px 1px 1px rgba(139, 105, 20, 0.5));
+}
+
+/* ========================================
+ * 装備パネル レア度別枠線（共通）
+ * 詳細度を上げるため同じクラスを2回指定
+ * ======================================== */
+.equip-panel--rarity-1.equip-panel--rarity-1 {
+  border-color: #8b5a2b;
+}
+
+.equip-panel--rarity-2.equip-panel--rarity-2 {
+  border-color: var(--metal-silver-border);
+}
+
+.equip-panel--rarity-3.equip-panel--rarity-3 {
+  position: relative;
+  border-color: var(--metal-gold-border);
+}
+
+.equip-panel--rarity-3.equip-panel--rarity-3::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 2px solid var(--metal-gold-border);
+  border-radius: calc(var(--border-radius-md) - 3px);
+  pointer-events: none;
+}

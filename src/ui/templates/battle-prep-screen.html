@@ -1,0 +1,39 @@
+<div class="screen battle-prep-screen dark-bg">
+  <div class="battle-prep-screen__content">
+    <!-- ヘッダー -->
+    <div class="screen-header">
+      <div class="screen-header__back"></div>
+      <h1 class="screen-header__title">バトル準備</h1>
+    </div>
+
+    <!-- ボディ -->
+    <div class="screen-body">
+      <div class="battle-prep-screen__body-inner">
+        <!-- ステージ情報パネル -->
+        <div class="battle-prep-screen__stage-panel ui-panel ui-panel--parchment">
+          <p class="battle-prep-screen__stage-label">~ ストーリー ~</p>
+          <div class="battle-prep-screen__stage-divider"></div>
+          <h2 class="battle-prep-screen__stage-name battle-prep-screen__stage-name--clickable">-</h2>
+        </div>
+
+        <!-- ボタンエリア -->
+        <div class="battle-prep-screen__buttons">
+          <!-- キャラクター選択ボタン -->
+          <button class="battle-prep-screen__character-btn ui-btn ui-btn--ribbon-secondary ui-btn--lg">
+            キャラクター: <span class="battle-prep-screen__character-name">{{characterName}}</span>
+          </button>
+
+          <!-- 装備選択ボタン -->
+          <button class="battle-prep-screen__equipment-btn ui-btn ui-btn--ribbon-secondary ui-btn--lg">
+            装備: <span class="battle-prep-screen__equipment-name">{{equipmentName}}</span>
+          </button>
+
+          <!-- 出撃ボタン -->
+          <button class="battle-prep-screen__sortie-btn ui-btn ui-btn--ribbon ui-btn--lg" disabled>
+            &#9876; 出撃 &#9876;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

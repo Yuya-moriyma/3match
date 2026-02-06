@@ -1,0 +1,789 @@
+/**
+ * BattleHUDScreen - 戦闘HUD用CSS
+ * Phaser canvasと重ねて表示するHTML UIレイヤー
+ */
+
+/* ========================================
+ * ルートコンテナ
+ * pointer-events: none でPhaser canvasへのタイル操作を妨げない
+ * #ui-layer > * { pointer-events: auto } を上書きするため詳細度を上げる
+ * ======================================== */
+#ui-layer > #battle-hud-root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ========================================
+ * ポーズボタン（Phase 1で実装）
+ * ======================================== */
+.battle-hud__pause-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  pointer-events: auto;
+}
+
+/* ========================================
+ * ボードプロキシ（Phaser盤面と同位置・同サイズの透明DOM要素）
+ * 敵UI・味方UI等をボード基準で相対配置するための参照要素
+ * CSS変数は BattleHUDScreen が BATTLE_HUD_INIT 時に設定する
+ * ======================================== */
+.battle-hud__board-proxy {
+  position: absolute;
+  top: var(--board-top, 47.1875%);
+  left: var(--board-left, 10%);
+  width: var(--board-width, 80%);
+  height: var(--board-height, 45%);
+  pointer-events: none;
+}
+
+/* ========================================
+ * 上部横並びコンテナ（敵UI左・味方UI右）
+ * ボードプロキシ内で bottom: 100% → 盤面の真上に配置
+ * ======================================== */
+.battle-hud__upper-row {
+  position: absolute;
+  bottom: calc(100% + 61px);
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.battle-hud__enemy-area {
+  pointer-events: auto;
+}
+
+.battle-hud__player-area {
+  pointer-events: auto;
+}
+
+/* ========================================
+ * アクションカウント（Phase 5で実装）
+ * ボードプロキシ内で盤面の真上・中央に配置
+ * ======================================== */
+.battle-hud__action-count {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+}
+
+/* ========================================
+ * ダメージ表示レイヤー（Phase 7で実装）
+ * ======================================== */
+.battle-hud__damage-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================
+ * ツールチップオーバーレイ（Phase 2で実装）
+ * 表示時のみ pointer-events: auto
+ * ======================================== */
+.battle-hud__tooltip-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.battle-hud__tooltip-overlay.active {
+  display: block;
+  pointer-events: auto;
+  z-index: var(--z-tooltip);
+}
+
+/* ========================================
+ * ツールチップ（Phase 2）
+ * ======================================== */
+
+/* 透明クリック背景 */
+.battle-tooltip__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ツールチップパネル */
+.battle-tooltip__panel {
+  position: relative;
+  min-width: 180px;
+  max-width: 260px;
+  padding: 12px 16px;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-body);
+  box-shadow: var(--shadow-medium);
+}
+
+/* 攻撃タイプ */
+.battle-tooltip__panel--attack {
+  background: var(--color-counter-attack-bg);
+  border: 2px solid var(--color-counter-attack);
+}
+
+.battle-tooltip__panel--attack .battle-tooltip__title {
+  color: var(--color-counter-attack);
+}
+
+.battle-tooltip__panel--attack .battle-tooltip__separator {
+  border-color: var(--color-counter-attack);
+}
+
+/* スキルタイプ */
+.battle-tooltip__panel--skill {
+  background: var(--color-counter-skill-bg);
+  border: 2px solid var(--color-counter-skill);
+}
+
+.battle-tooltip__panel--skill .battle-tooltip__title {
+  color: var(--color-counter-skill);
+}
+
+.battle-tooltip__panel--skill .battle-tooltip__separator {
+  border-color: var(--color-counter-skill);
+}
+
+.battle-tooltip__title {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.battle-tooltip__separator {
+  margin: 6px 0;
+  border: none;
+  border-top: 1px solid;
+  opacity: 0.4;
+}
+
+.battle-tooltip__body {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+/* ========================================
+ * ポーズメニューオーバーレイ（Phase 1で実装）
+ * 表示時のみ pointer-events: auto
+ * ======================================== */
+.battle-hud__pause-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.battle-hud__pause-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  z-index: var(--z-modal);
+}
+
+/* ========================================
+ * ポーズボタン（Phase 1）
+ * ======================================== */
+.battle-pause__btn {
+  font-size: 0.75rem;
+  padding: 8px 28px;
+}
+
+/* ========================================
+ * ポーズメニュー（Phase 1）
+ * ======================================== */
+
+/* 半透明背景 */
+.battle-pause__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* パネル */
+.battle-pause__panel {
+  position: relative;
+  width: 320px;
+  padding: 32px 28px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-parchment-light) 0%,
+    var(--color-parchment) 100%
+  );
+  border: 2px solid var(--color-accent-dark);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 0 0 4px var(--color-accent),
+              var(--shadow-heavy),
+              var(--shadow-parchment);
+  text-align: center;
+}
+
+/* タイトル */
+.battle-pause__title {
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: var(--text-accent);
+  letter-spacing: 0.05em;
+}
+
+/* スライダー */
+.battle-pause__slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.battle-pause__slider-label {
+  flex-shrink: 0;
+  width: 32px;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: var(--text-accent);
+  text-align: right;
+}
+
+.battle-pause__slider-input {
+  flex: 1;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--color-parchment-dark);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.battle-pause__slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-accent);
+  cursor: pointer;
+  box-shadow: var(--shadow-light);
+}
+
+.battle-pause__slider-input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-accent);
+  cursor: pointer;
+  box-shadow: var(--shadow-light);
+}
+
+.battle-pause__slider-value {
+  flex-shrink: 0;
+  width: 40px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--text-accent);
+  text-align: left;
+}
+
+/* ボタンコンテナ */
+.battle-pause__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.battle-pause__resume-btn,
+.battle-pause__retire-btn {
+  width: 200px;
+}
+
+/* ========================================
+ * 味方パネル
+ * ======================================== */
+.player-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+}
+
+.player-panel__frame {
+  width: 160px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--color-accent);
+  border-radius: 10px;
+  background: rgba(90, 69, 48, 0.92);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.player-panel__label {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+.player-panel__hp-outer {
+  position: relative;
+  width: 165px;
+  height: 22px;
+  margin-top: 6px;
+  border: 2px solid var(--color-accent);
+  border-radius: 6px;
+  background: var(--color-background);
+  overflow: hidden;
+}
+
+.player-panel__hp-bg {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.player-panel__hp-fill {
+  height: 100%;
+  background: var(--color-success);
+  border-radius: 4px;
+  transition: width 300ms ease-out;
+}
+
+.player-panel__hp-fill--danger {
+  background: var(--color-danger-critical);
+  animation: hpPulse 600ms ease-in-out infinite alternate;
+}
+
+@keyframes hpPulse {
+  from { opacity: 1; }
+  to { opacity: 0.7; }
+}
+
+.player-panel__hp-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-info);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.player-panel__poison {
+  display: none;
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #44cc44;
+}
+
+.player-panel__poison.active {
+  display: block;
+}
+
+/* ========================================
+ * 敵UIエリア（Phase 4）
+ * ======================================== */
+.enemy-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+}
+
+/* カウンター行（フレームの左上・右上の角が円の中心になるよう配置） */
+.enemy-panel__counter-row {
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  right: -14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+
+.enemy-panel__counter-spacer {
+  flex: 1;
+}
+
+/* 敵フレーム */
+.enemy-panel__frame {
+  width: 160px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--color-accent);
+  border-radius: 10px;
+  background: rgba(90, 69, 48, 0.92);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.enemy-panel__label {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+/* 敵HPバー */
+.enemy-panel__hp-outer {
+  position: relative;
+  width: 165px;
+  height: 22px;
+  margin-top: 6px;
+  border: 2px solid var(--color-accent);
+  border-radius: 6px;
+  background: var(--color-background);
+  overflow: hidden;
+}
+
+.enemy-panel__hp-bg {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.enemy-panel__hp-fill {
+  height: 100%;
+  background: var(--color-danger);
+  border-radius: 4px;
+  transition: width 300ms ease-out;
+}
+
+.enemy-panel__hp-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-info);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* カウンターアイコン */
+.enemy-counter {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  pointer-events: auto;
+}
+
+.enemy-counter--attack {
+  background: var(--color-counter-attack-bg);
+  border: 2px solid var(--color-counter-attack);
+}
+
+.enemy-counter--attack:hover {
+  box-shadow: 0 0 8px 3px rgba(255, 138, 101, 0.7),
+              0 0 16px 6px rgba(255, 138, 101, 0.35);
+  transform: scale(1.15);
+}
+
+.enemy-counter--skill {
+  background: var(--color-counter-skill-bg);
+  border: 2px solid var(--color-counter-skill);
+}
+
+.enemy-counter--skill:hover {
+  box-shadow: 0 0 8px 3px rgba(206, 147, 216, 0.7),
+              0 0 16px 6px rgba(206, 147, 216, 0.35);
+  transform: scale(1.15);
+}
+
+.enemy-counter__symbol {
+  position: absolute;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.enemy-counter--attack .enemy-counter__symbol {
+  color: var(--color-counter-attack);
+}
+
+.enemy-counter--skill .enemy-counter__symbol {
+  color: var(--color-counter-skill);
+}
+
+.enemy-counter__count {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 2px #000, 0 0 2px #000;
+  z-index: 1;
+}
+
+/* カウンター警告状態 */
+.enemy-counter--danger .enemy-counter__count {
+  color: var(--color-danger-critical);
+}
+
+.enemy-counter--danger {
+  animation: counterShake 100ms ease-in-out 3;
+}
+
+.enemy-counter--warning .enemy-counter__count {
+  color: var(--color-warning-urgent);
+}
+
+/* カウンター凍結 */
+.enemy-counter--frozen {
+  background: rgba(184, 134, 11, 0.9) !important;
+  border-color: #FFD700 !important;
+}
+
+.enemy-counter--frozen .enemy-counter__symbol {
+  color: #FFD700 !important;
+}
+
+.enemy-counter--frozen .enemy-counter__count {
+  color: #FFD700 !important;
+  text-shadow: 0 0 3px #8B6914, 0 0 3px #8B6914;
+}
+
+/* シェイクアニメーション */
+.enemy-panel--shaking {
+  animation: enemyShake 120ms ease-in-out 4;
+}
+
+@keyframes enemyShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@keyframes counterShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* ========================================
+ * アクションカウント（Phase 5）
+ * ======================================== */
+.action-count {
+  display: flex;
+  width: 100%;
+  border: 3px solid var(--color-accent);
+  border-radius: 10px;
+  background: rgba(90, 69, 48, 0.95);
+  overflow: hidden;
+}
+
+.action-count__section {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  padding: 3px 4px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  opacity: 0.85;
+}
+
+.action-count__section + .action-count__section {
+  border-left: 1px solid rgba(139, 90, 43, 0.5);
+}
+
+.action-count__section--highlight {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.action-count__icon {
+  font-size: 16px;
+  font-weight: bold;
+  transform: translateY(1px);
+}
+
+.action-count__triggers {
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.action-count__section--highlight .action-count__triggers {
+  animation: actionPulse 800ms ease-in-out infinite alternate;
+}
+
+@keyframes actionPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+/* カウントアップ時のパルスアニメーション */
+.action-count__triggers--pulse {
+  animation: actionCountUpPulse 150ms ease-out;
+}
+
+@keyframes actionCountUpPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.action-count__detail {
+  font-family: Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* アクションカウント色 */
+.action-count__section--attack .action-count__icon,
+.action-count__section--attack .action-count__triggers,
+.action-count__section--attack .action-count__detail {
+  color: #d86060;
+}
+
+.action-count__section--skill .action-count__icon,
+.action-count__section--skill .action-count__triggers,
+.action-count__section--skill .action-count__detail {
+  color: #d8c060;
+}
+
+.action-count__section--heal .action-count__icon,
+.action-count__section--heal .action-count__triggers,
+.action-count__section--heal .action-count__detail {
+  color: #7aaa6a;
+}
+
+/* ========================================
+ * ダメージポップアップ（Phase 7）
+ * ======================================== */
+.enemy-panel__damage-popup {
+  position: absolute;
+  font-family: Arial, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff4444;
+  text-shadow:
+    2px 2px 4px #000000,
+    -1px -1px 3px #000000;
+  pointer-events: none;
+  transform-origin: center center;
+  animation: damagePopup 950ms ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes damagePopup {
+  0% {
+    transform: translateX(-50%) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    transform: translateX(-50%) scale(1.2);
+    opacity: 1;
+  }
+  16% {
+    transform: translateX(-50%) scale(1.0);
+  }
+  55% {
+    transform: translateX(-50%) scale(1.0) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1.0) translateY(-40px);
+    opacity: 0;
+  }
+}
+
+/* ========================================
+ * プレイヤーダメージポップアップ
+ * ======================================== */
+.player-panel__damage-popup {
+  position: absolute;
+  font-family: Arial, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff4444;
+  text-shadow:
+    2px 2px 4px #000000,
+    -1px -1px 3px #000000;
+  pointer-events: none;
+  transform-origin: center center;
+  animation: damagePopup 950ms ease-out forwards;
+  z-index: 10;
+}
+
+/* ========================================
+ * 敵消滅アニメーション（Phase 7）
+ * ======================================== */
+.enemy-panel--dying {
+  animation: enemyDeath 750ms ease-in forwards;
+}
+
+@keyframes enemyDeath {
+  0%   { transform: translateX(0);    opacity: 1; }
+  5%   { transform: translateX(-6px); }
+  10%  { transform: translateX(6px);  }
+  15%  { transform: translateX(-6px); }
+  20%  { transform: translateX(6px);  }
+  25%  { transform: translateX(-6px); }
+  30%  { transform: translateX(6px);  }
+  35%  { transform: translateX(-6px); }
+  40%  { transform: translateX(6px);  opacity: 0.7; }
+  45%  { transform: translateX(-6px); }
+  50%  { transform: translateX(6px);  }
+  55%  { transform: translateX(-6px); }
+  60%  { transform: translateX(6px);  opacity: 0.4; }
+  65%  { transform: translateX(-6px); }
+  70%  { transform: translateX(6px);  }
+  75%  { transform: translateX(-6px); }
+  80%  { transform: translateX(6px);  opacity: 0.2; }
+  85%  { transform: translateX(-5px); }
+  90%  { transform: translateX(5px);  opacity: 0.1; }
+  95%  { transform: translateX(-4px); }
+  100% { transform: translateX(0);    opacity: 0; }
+}

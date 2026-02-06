@@ -1,0 +1,190 @@
+/**
+ * Classic Parchment Theme - CSS Custom Properties
+ * theme.ts から移行したマスターテーマ定義
+ */
+
+@font-face {
+  font-family: 'Hangyaku-G3rpg';
+  src: url('/assets/fonts/Hangyaku-G3rpg.ttf') format('truetype');
+  font-display: swap;
+}
+
+:root {
+  /* ========================================
+   * 背景系 - Dusty Parchment
+   * ======================================== */
+  --color-background: #2a1f14;
+  --color-background-gradient-top: #362a1c;
+  --color-background-gradient-bottom: #1e160e;
+
+  /* ========================================
+   * 羊皮紙系 - アンティーク象牙
+   * ======================================== */
+  --color-parchment: #f0e0c8;
+  --color-parchment-dark: #dccfb0;
+  --color-parchment-light: #f8f0e0;
+
+  /* ========================================
+   * インク/テキスト系 - セピアブラウン
+   * ======================================== */
+  --color-ink: #42301a;
+  --color-ink-light: #6b5030;
+
+  /* ========================================
+   * アクセント/装飾系 - バーントアンバー
+   * ======================================== */
+  --color-accent: #8b5a2b;
+  --color-accent-dark: #6b4520;
+  --color-accent-light: #b8844a;
+  --color-border: #5a4530;
+
+  /* ========================================
+   * 機能色
+   * ======================================== */
+  --color-success: #4CAF50;
+  --color-danger: #D84040;
+  --color-warning: #c9a227;
+  --color-danger-critical: #FF5722;
+  --color-warning-urgent: #FFAB00;
+
+  /* ========================================
+   * カウンター色
+   * ======================================== */
+  --color-counter-attack: #FF8A65;
+  --color-counter-skill: #CE93D8;
+  --color-counter-attack-bg: #5a2020;
+  --color-counter-skill-bg: #3a2050;
+
+  /* ========================================
+   * 金属カラー - リアルグラデーション
+   * ======================================== */
+  /* 金 (Gold) - 深みのある黄金色 */
+  --metal-gold-gradient: linear-gradient(
+    145deg,
+    #fff8dc 0%,
+    #ffd700 15%,
+    #daa520 35%,
+    #b8860b 50%,
+    #cd9b1d 65%,
+    #ffd700 80%,
+    #fff8dc 100%
+  );
+  --metal-gold-border: #c9a227;
+  --metal-gold-shadow: 0 2px 4px rgba(139, 105, 20, 0.4);
+  --metal-gold-text-shadow:
+    0 1px 0 #fff8dc,
+    0 -1px 0 #8b6914,
+    1px 0 0 #daa520,
+    -1px 0 0 #daa520;
+
+  /* 銀 (Silver) - 深みのあるシルバー */
+  --metal-silver-gradient: linear-gradient(
+    145deg,
+    #ffffff 0%,
+    #e8e8e8 15%,
+    #b8b8b8 35%,
+    #888888 50%,
+    #a8a8a8 65%,
+    #d8d8d8 80%,
+    #f0f0f0 100%
+  );
+  --metal-silver-border: #909090;
+  --metal-silver-shadow: 0 2px 4px rgba(80, 80, 80, 0.4);
+  --metal-silver-text-shadow:
+    0 1px 0 #ffffff,
+    0 -1px 0 #606060,
+    1px 0 0 #a0a0a0,
+    -1px 0 0 #a0a0a0;
+
+  /* 銅 (Bronze) - 深みのあるブロンズ */
+  --metal-bronze-gradient: linear-gradient(
+    145deg,
+    #e6c9a8 0%,
+    #cd7f32 15%,
+    #a0522d 35%,
+    #8b4513 50%,
+    #a0522d 65%,
+    #cd7f32 80%,
+    #deb887 100%
+  );
+  --metal-bronze-border: #5c3317;
+  --metal-bronze-shadow: 0 2px 4px rgba(92, 51, 23, 0.4);
+  --metal-bronze-text-shadow:
+    0 1px 0 #deb887,
+    0 -1px 0 #5c3317,
+    1px 0 0 #8b4513,
+    -1px 0 0 #8b4513;
+
+  /* ========================================
+   * テキスト色
+   * ======================================== */
+  --text-primary: #42301a;
+  --text-secondary: #6b5030;
+  --text-accent: #b8844a;
+  --text-light: #f0e0c8;
+  --text-info: #ffffff;
+  --text-muted: #8a7050;
+
+  /* ========================================
+   * フォント
+   * ======================================== */
+  --font-display: 'Kaisei Opti', 'Cinzel', serif;
+  --font-body: 'Kaisei Opti', 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+  --font-title-logo: 'Hangyaku-G3rpg', 'Cinzel', serif;
+
+  /* ========================================
+   * シャドウ
+   * ======================================== */
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.3);
+  --shadow-parchment: inset 0 0 20px rgba(61, 41, 20, 0.1);
+
+  /* ========================================
+   * ボーダー
+   * ======================================== */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+  /* ========================================
+   * トランジション
+   * ======================================== */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* ========================================
+   * z-index レイヤー
+   * ======================================== */
+  --z-phaser: 0;
+  --z-ui: 10;
+  --z-effects: 20;
+  --z-modal: 100;
+  --z-tooltip: 1000;
+}
+
+/* ========================================
+ * 羊皮紙風背景グラデーション
+ * ======================================== */
+.parchment-bg {
+  background: linear-gradient(
+    135deg,
+    var(--color-parchment-light) 0%,
+    var(--color-parchment) 50%,
+    var(--color-parchment-dark) 100%
+  );
+  box-shadow: var(--shadow-parchment);
+}
+
+/* ========================================
+ * ダークブラウン背景グラデーション
+ * ======================================== */
+.dark-bg {
+  background: linear-gradient(
+    to bottom,
+    var(--color-background-gradient-top) 0%,
+    var(--color-background) 50%,
+    var(--color-background-gradient-bottom) 100%
+  );
+}

@@ -1,0 +1,37 @@
+<div class="screen quest-screen dark-bg">
+  <div class="quest-screen__content">
+    <!-- ヘッダー -->
+    <div class="screen-header">
+      <div class="screen-header__back"></div>
+      <h1 class="screen-header__title">クエスト</h1>
+    </div>
+
+    <!-- ボディ -->
+    <div class="screen-body">
+      <div class="quest-screen__body-inner">
+        <!-- カルーセル部 -->
+        <div class="quest-screen__carousel">
+          <div class="quest-screen__carousel-prev"></div>
+          <div class="quest-screen__panel-viewport"></div>
+          <div class="quest-screen__carousel-next"></div>
+        </div>
+
+        <!-- カルーセルインジケーター -->
+        <div class="quest-screen__carousel-indicators"></div>
+
+        <!-- ボタンエリア -->
+        <div class="quest-screen__buttons">
+          <button class="quest-screen__character-btn ui-btn ui-btn--ribbon-secondary ui-btn--lg">
+            キャラクター: <span class="quest-screen__character-name">{{characterName}}</span>
+          </button>
+          <button class="quest-screen__equipment-btn ui-btn ui-btn--ribbon-secondary ui-btn--lg">
+            装備: <span class="quest-screen__equipment-name">{{equipmentName}}</span>
+          </button>
+          <button class="quest-screen__sortie-btn ui-btn ui-btn--ribbon ui-btn--lg">
+            &#9876; 出撃 &#9876;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,438 @@
+/**
+ * BattlePrepScreen - バトル準備画面スタイル
+ */
+
+/* ========================================
+ * コンテナ
+ * ======================================== */
+.battle-prep-screen__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+}
+
+/* screen-body のストレッチ */
+.battle-prep-screen .screen-body {
+  align-items: stretch;
+}
+
+/* ボディ内部 */
+.battle-prep-screen__body-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px;
+  flex: 1;
+}
+
+/* ========================================
+ * ステージ情報パネル
+ * ======================================== */
+.battle-prep-screen__stage-panel {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.battle-prep-screen__stage-label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0 0 8px 0;
+}
+
+.battle-prep-screen__stage-divider {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+  margin: 8px auto 16px;
+  width: 60%;
+}
+
+.battle-prep-screen__stage-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.battle-prep-screen__stage-name--clickable {
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.battle-prep-screen__stage-name--clickable:hover {
+  color: var(--text-accent);
+}
+
+/* ========================================
+ * ボタンエリア
+ * ======================================== */
+.battle-prep-screen__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  flex: 1;
+}
+
+.battle-prep-screen__character-btn,
+.battle-prep-screen__equipment-btn,
+.battle-prep-screen__sortie-btn {
+  width: 100%;
+  padding: 20px 32px;
+  font-size: 1.25rem;
+}
+
+.battle-prep-screen__character-name,
+.battle-prep-screen__equipment-name {
+  font-weight: bold;
+}
+
+/* ========================================
+ * モーダル
+ * ======================================== */
+.battle-prep-screen__modal-dialog {
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.battle-prep-screen__modal-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  font-style: italic;
+  margin: 0 0 8px 0;
+}
+
+.battle-prep-screen__modal-divider {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+  margin: 8px auto 24px;
+  width: 50%;
+}
+
+/* ========================================
+ * キャラクターカードリスト
+ * ======================================== */
+.battle-prep-screen__character-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+/* ========================================
+ * キャラクターカード
+ * ======================================== */
+.battle-prep-screen__character-card {
+  position: relative;
+  width: calc(50% - 8px);
+  min-width: 180px;
+  max-width: 200px;
+  padding: 20px 16px;
+  background: var(--color-parchment-light);
+  border: 3px solid var(--color-parchment-dark);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.battle-prep-screen__character-card:hover {
+  background: var(--color-parchment-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.battle-prep-screen__character-card--selected {
+  background: #fdf6ec;
+  border-color: var(--color-accent);
+  border-width: 3px;
+  box-shadow:
+    0 0 0 2px var(--color-accent-light),
+    0 2px 8px rgba(139, 90, 43, 0.25);
+}
+
+.battle-prep-screen__character-card--selected:hover {
+  background: #fdf6ec;
+}
+
+.battle-prep-screen__card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.battle-prep-screen__card-stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.battle-prep-screen__card-stat {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+
+.battle-prep-screen__card-stat--attack {
+  color: #8b2020;
+  background: #f8e0e0;
+  border: 1px solid #e0b0b0;
+}
+
+.battle-prep-screen__card-stat--heal {
+  color: #1a6b2a;
+  background: #e0f0e4;
+  border: 1px solid #b0d0b8;
+}
+
+.battle-prep-screen__card-skill-name {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-accent-dark);
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.battle-prep-screen__card-skill-desc {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+  min-height: 3em;
+}
+
+.battle-prep-screen__card-cost {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-parchment-dark);
+}
+
+.battle-prep-screen__card-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.1rem;
+  color: #fff;
+  background: var(--color-accent);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ========================================
+ * 装備説明パネル
+ * ======================================== */
+.battle-prep-screen__equip-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-parchment-dark);
+  border-radius: var(--border-radius-md);
+  min-height: 100px;
+  justify-content: center;
+}
+
+.battle-prep-screen__equip-detail-placeholder {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
+}
+
+.battle-prep-screen__equip-detail-icon {
+  font-size: 48px;
+  color: var(--color-accent-dark);
+}
+
+.battle-prep-screen__equip-detail-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0;
+}
+
+.battle-prep-screen__equip-detail-effect {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-accent-dark);
+  font-weight: bold;
+  margin: 0;
+}
+
+/* ========================================
+ * 装備アイコングリッド
+ * ======================================== */
+.battle-prep-screen__equip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+/* ========================================
+ * 装備アイコンカード
+ * ======================================== */
+.battle-prep-screen__equip-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-parchment-dark);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  aspect-ratio: 1;
+  justify-content: center;
+}
+
+.battle-prep-screen__equip-icon:hover {
+  background: var(--color-parchment-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.battle-prep-screen__equip-icon--selected {
+  background: #fdf6ec;
+  border-color: var(--color-accent);
+  box-shadow:
+    0 0 0 2px var(--color-accent-light),
+    0 2px 8px rgba(139, 90, 43, 0.25);
+}
+
+.battle-prep-screen__equip-icon--selected:hover {
+  background: #fdf6ec;
+}
+
+.battle-prep-screen__equip-icon-symbol {
+  font-size: 32px;
+  color: var(--color-accent-dark);
+}
+
+/* レア度別アイコン色 - リアル金属グラデーション */
+.battle-prep-screen__equip-icon--rarity-1 .battle-prep-screen__equip-icon-symbol {
+  color: #8b5a2b;
+  text-shadow: none;
+  filter: drop-shadow(1px 1px 1px rgba(92, 51, 23, 0.5));
+}
+
+.battle-prep-screen__equip-icon--rarity-2 .battle-prep-screen__equip-icon-symbol {
+  background: var(--metal-silver-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(1px 1px 1px rgba(80, 80, 80, 0.5));
+}
+
+.battle-prep-screen__equip-icon--rarity-3 .battle-prep-screen__equip-icon-symbol {
+  background: var(--metal-gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(1px 1px 1px rgba(139, 105, 20, 0.5));
+}
+
+.battle-prep-screen__equip-icon-name {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.battle-prep-screen__modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.battle-prep-screen__modal-close {
+  margin-top: 8px;
+}
+
+/* ========================================
+ * レスポンシブ対応
+ * ======================================== */
+@media (max-width: 480px) {
+  .battle-prep-screen__stage-name {
+    font-size: 1.25rem;
+  }
+
+  .battle-prep-screen__character-btn,
+  .battle-prep-screen__equipment-btn,
+  .battle-prep-screen__sortie-btn {
+    padding: 16px 24px;
+    font-size: 1rem;
+  }
+
+  .battle-prep-screen__character-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  .battle-prep-screen__character-list {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .battle-prep-screen__equip-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

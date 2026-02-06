@@ -1,0 +1,41 @@
+/**
+ * ShowcaseScreen - デザインショーケース画面スタイル
+ */
+
+/* ========================================
+ * コンテナ
+ * ======================================== */
+.showcase-screen__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ボディ内部 */
+.showcase-screen__body-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================
+ * ナビゲーションボタン
+ * ======================================== */
+.showcase-screen__nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.showcase-screen__nav-btn {
+  width: 100%;
+}

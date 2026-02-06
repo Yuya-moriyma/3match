@@ -1,0 +1,773 @@
+/**
+ * ResultScreen - リザルト画面スタイル
+ */
+
+/* ========================================
+ * コンテナ
+ * ======================================== */
+.result-screen__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+}
+
+/* ========================================
+ * タイトルフレーム
+ * ======================================== */
+.result-screen__title-frame {
+  text-align: center;
+  padding: 24px 48px;
+}
+
+.result-screen__title-frame--victory {
+  position: relative;
+}
+
+.result-screen__title-frame--defeat {
+  opacity: 0.9;
+}
+
+/* ========================================
+ * タイトルテキスト
+ * ======================================== */
+.result-screen__title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  margin: 0;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.result-screen__title--victory {
+  color: #ffd700;
+  text-shadow:
+    0 0 10px rgba(255, 215, 0, 0.5),
+    2px 2px 0 #b8860b,
+    4px 4px 8px rgba(0, 0, 0, 0.5);
+  animation: victoryPulse 2s ease-in-out infinite;
+}
+
+.result-screen__title--defeat {
+  color: #ff6666;
+  text-shadow:
+    2px 2px 0 #8b0000,
+    4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
+ * 勝利時の星装飾
+ * ======================================== */
+.result-screen__stars {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.result-screen__star {
+  font-size: 2rem;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  animation: starBounce 1s ease-in-out infinite;
+}
+
+.result-screen__star--large {
+  font-size: 2.5rem;
+  animation-delay: 0.1s;
+}
+
+.result-screen__star:first-child {
+  animation-delay: 0s;
+}
+
+.result-screen__star:last-child {
+  animation-delay: 0.2s;
+}
+
+/* ========================================
+ * 結果パネル
+ * ======================================== */
+.result-screen__panel {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.result-screen__panel-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  font-style: italic;
+  margin: 0 0 8px 0;
+}
+
+.result-screen__panel-divider {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+  margin: 8px auto 20px;
+  width: 50%;
+}
+
+/* ========================================
+ * 統計情報
+ * ======================================== */
+.result-screen__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.result-screen__stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: var(--border-radius-sm);
+}
+
+.result-screen__stat-label {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+}
+
+.result-screen__stat-value {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: bold;
+}
+
+/* ========================================
+ * 区切り線
+ * ======================================== */
+.result-screen__divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+  margin: 16px 0;
+}
+
+/* ========================================
+ * 戦利品なしメッセージ
+ * ======================================== */
+.result-screen__loot-empty {
+  padding: 16px;
+  text-align: center;
+}
+
+.result-screen__loot-empty p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ========================================
+ * 戦利品（ドロップアイテム）セクション
+ * equip-modal.css のスタイルと統一
+ * ======================================== */
+.result-screen__loot-grid {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 0 16px;
+}
+
+.result-screen__loot-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 4px;
+  width: 80px;
+  height: 80px;
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-parchment-dark);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.result-screen__loot-item:hover {
+  background: var(--color-parchment-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.result-screen__loot-item:active {
+  transform: translateY(0);
+}
+
+.result-screen__loot-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-screen__loot-icon .material-symbols-outlined {
+  font-size: 32px;
+  color: var(--color-accent-dark);
+}
+
+/* レア度別アイコン色 - equip-modal.css と統一 */
+.result-screen__loot-item--rarity-1 .result-screen__loot-icon .material-symbols-outlined {
+  color: #8b5a2b;
+  filter: drop-shadow(1px 1px 1px rgba(92, 51, 23, 0.5));
+}
+
+.result-screen__loot-item--rarity-2 .result-screen__loot-icon .material-symbols-outlined {
+  background: var(--metal-silver-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(1px 1px 1px rgba(80, 80, 80, 0.5));
+}
+
+.result-screen__loot-item--rarity-3 .result-screen__loot-icon .material-symbols-outlined {
+  background: var(--metal-gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(1px 1px 1px rgba(139, 105, 20, 0.5));
+}
+
+.result-screen__loot-name {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  color: var(--text-primary);
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ========================================
+ * 報酬セクション
+ * ======================================== */
+.result-screen__rewards {
+  text-align: left;
+}
+
+.result-screen__rewards-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.result-screen__reward-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+}
+
+.result-screen__reward-icon {
+  color: var(--color-accent);
+  font-size: 1.25rem;
+}
+
+/* ========================================
+ * 経験値報酬セクション
+ * ======================================== */
+.result-screen__exp-reward {
+  border-top: 1px solid rgba(139, 119, 90, 0.3);
+  margin-top: 4px;
+  padding-top: 8px;
+}
+
+/* ========================================
+ * 装備詳細モーダル
+ * equip-modal.css のスタイルを再利用
+ * ======================================== */
+
+/* 空のheader/footerを非表示 */
+.result-screen__equip-modal .ui-modal__header,
+.result-screen__equip-modal .ui-modal__footer {
+  display: none;
+}
+
+.result-screen__equip-modal .ui-modal__body {
+  margin-bottom: 0;
+}
+
+.result-screen__equip-modal .ui-modal__dialog {
+  width: 90%;
+  max-width: 360px;
+  text-align: center;
+}
+
+/* 詳細パネルの高さ調整（選択モーダルより小さめ） */
+.result-screen__equip-modal .equip-modal__detail {
+  min-height: auto;
+}
+
+/* ========================================
+ * 敗北時メッセージ
+ * ======================================== */
+.result-screen__message {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.result-screen__message-sub {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ========================================
+ * ボタンエリア
+ * ======================================== */
+.result-screen__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.result-screen__buttons--defeat {
+  gap: 12px;
+}
+
+.result-screen__btn {
+  width: 100%;
+}
+
+/* ========================================
+ * EXP進捗バー
+ * ======================================== */
+.result-screen__exp-section {
+  margin: 8px 16px 0;
+}
+
+.result-screen__exp-bar {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(139, 119, 90, 0.4);
+}
+
+.result-screen__exp-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, #8b6914, #c9a63c, #ffd700);
+  border-radius: 12px;
+  transition: width 0.8s ease-out;
+}
+
+.result-screen__exp-bar-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+}
+
+/* ========================================
+ * レベルアップ演出オーバーレイ
+ * ======================================== */
+.result-screen__levelup-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  animation: levelupDarken 0.5s ease-out forwards;
+  overflow: hidden;
+}
+
+.result-screen__levelup-overlay--fade-out {
+  animation: levelupFadeOut 0.5s ease-in forwards;
+}
+
+/* 光の爆発エフェクト */
+.result-screen__levelup-burst {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.9) 0%,
+    rgba(255, 215, 0, 0.4) 40%,
+    rgba(255, 215, 0, 0) 70%
+  );
+  opacity: 0;
+  transform: scale(0);
+  animation: levelupBurst 0.8s ease-out 0.5s forwards;
+}
+
+/* テキストコンテナ */
+.result-screen__levelup-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+/* LEVEL UP! メインテキスト */
+.result-screen__levelup-label {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: #ffd700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 20px rgba(255, 215, 0, 0.8),
+    0 0 40px rgba(255, 215, 0, 0.4),
+    0 0 60px rgba(255, 215, 0, 0.2),
+    3px 3px 0 #b8860b,
+    5px 5px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: scale(0);
+  animation: levelupTextBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s forwards,
+             victoryPulse 2s ease-in-out 1.4s infinite;
+}
+
+/* Lv.X → Lv.Y テキスト */
+.result-screen__levelup-levels {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: #fff;
+  margin-top: 12px;
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    2px 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: levelupLevelSlideIn 0.5s ease-out 1.2s forwards;
+}
+
+/* タップで続行ヒント */
+.result-screen__levelup-hint {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 24px;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.result-screen__levelup-hint--visible {
+  opacity: 1;
+  animation: levelupHintBlink 1.5s ease-in-out infinite;
+}
+
+@keyframes levelupHintBlink {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.3; }
+}
+
+/* パーティクルコンテナ */
+.result-screen__levelup-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 個々のパーティクル */
+.result-screen__levelup-particles span {
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffd700;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
+  opacity: 0;
+}
+
+.result-screen__levelup-particles span:nth-child(1) {
+  left: 50%; top: 50%;
+  animation: levelupParticle1 1.5s ease-out 0.6s forwards;
+}
+.result-screen__levelup-particles span:nth-child(2) {
+  left: 50%; top: 50%;
+  animation: levelupParticle2 1.5s ease-out 0.7s forwards;
+}
+.result-screen__levelup-particles span:nth-child(3) {
+  left: 50%; top: 50%;
+  background: #fff;
+  width: 4px; height: 4px;
+  animation: levelupParticle3 1.4s ease-out 0.65s forwards;
+}
+.result-screen__levelup-particles span:nth-child(4) {
+  left: 50%; top: 50%;
+  animation: levelupParticle4 1.6s ease-out 0.75s forwards;
+}
+.result-screen__levelup-particles span:nth-child(5) {
+  left: 50%; top: 50%;
+  background: #fff;
+  width: 4px; height: 4px;
+  animation: levelupParticle5 1.3s ease-out 0.8s forwards;
+}
+.result-screen__levelup-particles span:nth-child(6) {
+  left: 50%; top: 50%;
+  animation: levelupParticle6 1.5s ease-out 0.7s forwards;
+}
+.result-screen__levelup-particles span:nth-child(7) {
+  left: 50%; top: 50%;
+  background: #fff;
+  width: 5px; height: 5px;
+  animation: levelupParticle7 1.4s ease-out 0.85s forwards;
+}
+.result-screen__levelup-particles span:nth-child(8) {
+  left: 50%; top: 50%;
+  animation: levelupParticle8 1.6s ease-out 0.6s forwards;
+}
+.result-screen__levelup-particles span:nth-child(9) {
+  left: 50%; top: 50%;
+  width: 5px; height: 5px;
+  animation: levelupParticle1 1.3s ease-out 0.9s forwards;
+}
+.result-screen__levelup-particles span:nth-child(10) {
+  left: 50%; top: 50%;
+  background: #fff;
+  width: 4px; height: 4px;
+  animation: levelupParticle3 1.5s ease-out 0.95s forwards;
+}
+.result-screen__levelup-particles span:nth-child(11) {
+  left: 50%; top: 50%;
+  animation: levelupParticle5 1.4s ease-out 0.7s forwards;
+}
+.result-screen__levelup-particles span:nth-child(12) {
+  left: 50%; top: 50%;
+  background: #fff;
+  animation: levelupParticle7 1.6s ease-out 0.8s forwards;
+}
+.result-screen__levelup-particles span:nth-child(13) {
+  left: 50%; top: 50%;
+  width: 5px; height: 5px;
+  animation: levelupParticle2 1.5s ease-out 0.85s forwards;
+}
+.result-screen__levelup-particles span:nth-child(14) {
+  left: 50%; top: 50%;
+  background: #fff;
+  width: 4px; height: 4px;
+  animation: levelupParticle6 1.3s ease-out 0.75s forwards;
+}
+.result-screen__levelup-particles span:nth-child(15) {
+  left: 50%; top: 50%;
+  animation: levelupParticle4 1.5s ease-out 0.9s forwards;
+}
+.result-screen__levelup-particles span:nth-child(16) {
+  left: 50%; top: 50%;
+  background: #fff;
+  width: 5px; height: 5px;
+  animation: levelupParticle8 1.4s ease-out 0.65s forwards;
+}
+
+/* ========================================
+ * アニメーション
+ * ======================================== */
+
+/* 暗転 */
+@keyframes levelupDarken {
+  from { background: rgba(0, 0, 0, 0); }
+  to { background: rgba(0, 0, 0, 0.85); }
+}
+
+/* フェードアウト */
+@keyframes levelupFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* 光の爆発 */
+@keyframes levelupBurst {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
+/* テキストバウンス登場 */
+@keyframes levelupTextBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* レベル表示スライドイン */
+@keyframes levelupLevelSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* パーティクル（8方向パターン） */
+@keyframes levelupParticle1 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-120px, -80px) scale(0); }
+}
+@keyframes levelupParticle2 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(100px, -100px) scale(0); }
+}
+@keyframes levelupParticle3 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(130px, 30px) scale(0); }
+}
+@keyframes levelupParticle4 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(80px, 120px) scale(0); }
+}
+@keyframes levelupParticle5 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-30px, 130px) scale(0); }
+}
+@keyframes levelupParticle6 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-110px, 70px) scale(0); }
+}
+@keyframes levelupParticle7 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-60px, -120px) scale(0); }
+}
+@keyframes levelupParticle8 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(50px, -130px) scale(0); }
+}
+@keyframes victoryPulse {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow:
+      0 0 10px rgba(255, 215, 0, 0.5),
+      2px 2px 0 #b8860b,
+      4px 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.02);
+    text-shadow:
+      0 0 20px rgba(255, 215, 0, 0.7),
+      2px 2px 0 #b8860b,
+      4px 4px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes starBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.1);
+  }
+}
+
+/* ========================================
+ * レスポンシブ対応
+ * ======================================== */
+@media (max-width: 480px) {
+  .result-screen__title {
+    font-size: 2.25rem;
+    letter-spacing: 2px;
+  }
+
+  .result-screen__star {
+    font-size: 1.5rem;
+  }
+
+  .result-screen__star--large {
+    font-size: 2rem;
+  }
+
+  .result-screen__content {
+    gap: 24px;
+    padding: 16px;
+  }
+
+  .result-screen__panel {
+    padding: 16px;
+  }
+
+  .result-screen__levelup-label {
+    font-size: 2.5rem;
+  }
+
+  .result-screen__levelup-levels {
+    font-size: 1.2rem;
+  }
+
+  .result-screen__levelup-hint {
+    font-size: 0.85rem;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 769px) {
+  .result-screen__title {
+    font-size: 4rem;
+  }
+
+  .result-screen__content {
+    gap: 40px;
+  }
+}

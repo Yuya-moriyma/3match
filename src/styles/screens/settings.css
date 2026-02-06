@@ -1,0 +1,245 @@
+/**
+ * SettingsScreen - 設定画面スタイル
+ */
+
+.settings-screen {
+  background: linear-gradient(
+    to bottom,
+    var(--color-background-gradient-top) 0%,
+    var(--color-background) 50%,
+    var(--color-background-gradient-bottom) 100%
+  );
+}
+
+.settings-screen__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+}
+
+/* ボディ内部 */
+.settings-screen__body-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 480px;
+  padding: 24px;
+}
+
+/* セクション */
+.settings-screen__section {
+  width: 100%;
+  max-width: 480px;
+}
+
+/* スライダーグループ */
+.settings-screen__slider-group {
+  margin-bottom: 24px;
+}
+
+.settings-screen__slider-group:last-child {
+  margin-bottom: 0;
+}
+
+.settings-screen__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.settings-screen__slider-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* カスタムスライダー */
+.settings-screen__slider {
+  flex: 1;
+  height: 16px;
+  appearance: none;
+  background: var(--color-border);
+  border: 2px solid var(--color-accent-dark);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.settings-screen__slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 50%,
+    var(--color-accent-dark) 100%
+  );
+  border: 3px solid var(--color-accent-dark);
+  border-radius: 50%;
+  cursor: grab;
+  box-shadow: var(--shadow-medium);
+  transition: transform var(--transition-fast);
+}
+
+.settings-screen__slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.settings-screen__slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(0.95);
+}
+
+.settings-screen__slider::-moz-range-thumb {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 50%,
+    var(--color-accent-dark) 100%
+  );
+  border: 3px solid var(--color-accent-dark);
+  border-radius: 50%;
+  cursor: grab;
+  box-shadow: var(--shadow-medium);
+}
+
+.settings-screen__value {
+  min-width: 50px;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+/* セクションタイトル */
+.settings-screen__section-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0 0 8px 0;
+}
+
+.settings-screen__divider {
+  margin: 0 auto;
+  width: 60%;
+}
+
+.settings-screen__placeholder {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 16px 0 0 0;
+}
+
+/* トグルスイッチ */
+.settings-screen__toggle-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.settings-screen__toggle-label {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.settings-screen__toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 32px;
+}
+
+.settings-screen__toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.settings-screen__toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-border);
+  border: 2px solid var(--color-accent-dark);
+  border-radius: 16px;
+  transition: background-color var(--transition-fast);
+}
+
+.settings-screen__toggle-slider::before {
+  position: absolute;
+  content: '';
+  height: 24px;
+  width: 24px;
+  left: 2px;
+  bottom: 2px;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 50%,
+    var(--color-accent-dark) 100%
+  );
+  border: 2px solid var(--color-accent-dark);
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+  box-shadow: var(--shadow-small);
+}
+
+.settings-screen__toggle-input:checked + .settings-screen__toggle-slider {
+  background-color: var(--color-accent);
+}
+
+.settings-screen__toggle-input:checked + .settings-screen__toggle-slider::before {
+  transform: translateX(28px);
+}
+
+.settings-screen__toggle-desc {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 8px 0 0 0;
+}
+
+/* リセットボタングループ */
+.settings-screen__reset-group {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.settings-screen__reset-btn {
+  width: 100%;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 480px) {
+  .settings-screen__label {
+    font-size: 1rem;
+  }
+
+  .settings-screen__slider::-webkit-slider-thumb {
+    width: 28px;
+    height: 28px;
+  }
+}

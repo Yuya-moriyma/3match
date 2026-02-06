@@ -1,0 +1,102 @@
+/**
+ * MenuScreen - メニュー画面スタイル
+ */
+
+.menu-screen {
+  background: linear-gradient(
+    to bottom,
+    var(--color-background-gradient-top) 0%,
+    var(--color-background) 50%,
+    var(--color-background-gradient-bottom) 100%
+  );
+}
+
+.menu-screen__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+}
+
+/* screen-body のストレッチ */
+.menu-screen .screen-body {
+  align-items: stretch;
+}
+
+/* ボディ内部 */
+.menu-screen__body-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px;
+  flex: 1;
+}
+
+/* プレイヤー情報 */
+.menu-screen__player-info {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 24px;
+}
+
+.menu-screen__player-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.menu-screen__player-details {
+  display: flex;
+  gap: 24px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.menu-screen__player-level,
+.menu-screen__player-story {
+  white-space: nowrap;
+}
+
+/* メニューボタン */
+.menu-screen__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  flex: 1;
+}
+
+.menu-screen__menu-btn {
+  width: 100%;
+  padding: 20px 32px;
+  font-size: 1.25rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 480px) {
+  .menu-screen__player-info {
+    min-height: 80px;
+  }
+
+  .menu-screen__menu-btn {
+    padding: 16px 24px;
+    font-size: 1rem;
+  }
+}

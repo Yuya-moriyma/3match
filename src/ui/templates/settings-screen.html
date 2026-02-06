@@ -1,0 +1,59 @@
+<div class="screen settings-screen dark-bg">
+  <div class="settings-screen__content">
+    <!-- ヘッダー -->
+    <div class="screen-header">
+      <div class="screen-header__back"></div>
+      <h1 class="screen-header__title">設定</h1>
+    </div>
+
+    <!-- ボディ -->
+    <div class="screen-body">
+      <div class="settings-screen__body-inner">
+        <!-- 音量設定 -->
+        <div class="settings-screen__section ui-panel ui-panel--parchment">
+          <!-- BGM音量 -->
+          <div class="settings-screen__slider-group">
+            <label class="settings-screen__label" for="bgm-volume">BGM音量</label>
+            <div class="settings-screen__slider-row">
+              <input type="range" id="bgm-volume" class="settings-screen__slider" min="0" max="100" value="50">
+              <span class="settings-screen__value" id="bgm-value">50%</span>
+            </div>
+          </div>
+
+          <!-- SE音量 -->
+          <div class="settings-screen__slider-group">
+            <label class="settings-screen__label" for="se-volume">SE音量</label>
+            <div class="settings-screen__slider-row">
+              <input type="range" id="se-volume" class="settings-screen__slider" min="0" max="100" value="50">
+              <span class="settings-screen__value" id="se-value">50%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- その他設定 -->
+        <div class="settings-screen__section ui-panel ui-panel--parchment">
+          <h2 class="settings-screen__section-title">~ その他設定 ~</h2>
+          <div class="settings-screen__divider"></div>
+
+          <!-- テストモード -->
+          <div class="settings-screen__toggle-group">
+            <label class="settings-screen__toggle-label" for="test-mode">テストモード</label>
+            <label class="settings-screen__toggle">
+              <input type="checkbox" id="test-mode" class="settings-screen__toggle-input">
+              <span class="settings-screen__toggle-slider"></span>
+            </label>
+          </div>
+          <p class="settings-screen__toggle-desc">ONにするとストーリーが進行しません</p>
+
+          <!-- チュートリアルリセット -->
+          <div class="settings-screen__reset-group">
+            <button class="settings-screen__reset-btn ui-btn ui-btn--outline" id="tutorial-reset">
+              チュートリアルをリセット
+            </button>
+            <p class="settings-screen__toggle-desc">チュートリアルを再度表示します</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
