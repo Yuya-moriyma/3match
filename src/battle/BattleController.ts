@@ -323,6 +323,14 @@ export class BattleController {
    * フリック検出用のsceneレベルイベントを登録
    */
   private setupFlickListeners(): void {
+    // シーンレベルでpointerdownをリッスン（タイル間の隙間でも検出するため）
+    this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+      const result = this.boardModel.getRowColFromWorldPosition(pointer.x, pointer.y);
+      if (result) {
+        this.onTilePointerDown(result.row, result.col, pointer);
+      }
+    });
+
     this.scene.input.on('pointerup', (pointer: Phaser.Input.Pointer) => {
       this.tileSwapHandler.onPointerUp(pointer);
     });
@@ -460,6 +468,7 @@ export class BattleController {
     this.scene.game.events.off(GameBridgeEvents.TUTORIAL_CLOSED);
 
     // フリック検出用イベントリスナーを解除
+    this.scene.input.off('pointerdown');
     this.scene.input.off('pointerup');
 
     this.battleHUD.cleanup();
