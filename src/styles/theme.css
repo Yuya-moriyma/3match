@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: 'Hangyaku-G3rpg';
-  src: url('/assets/fonts/Hangyaku-G3rpg.ttf') format('truetype');
+  src: url('../assets/fonts/Hangyaku-G3rpg.ttf') format('truetype');
   font-display: swap;
 }
 
