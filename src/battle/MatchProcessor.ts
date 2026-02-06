@@ -11,7 +11,7 @@ import { StatusEffectController } from './StatusEffectController';
 import { COUNT_UP_INTERVAL_MS } from './constants';
 
 export interface MatchProcessorCallbacks {
-  onTileClick: (row: number, col: number) => void;
+  onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void;
   dropTiles: (isPlayerMove: boolean) => void;
   processChainBonusExplosions: (bonusOrbs: Tile[], isPlayerMove: boolean) => void;
   getChainMultiplier: () => number;

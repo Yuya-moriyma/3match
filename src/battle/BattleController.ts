@@ -156,7 +156,7 @@ export class BattleController {
       this.tileFactory
     );
     this.tileDropHandler.setCallbacks({
-      onTileClick: (row, col) => this.onTileClick(row, col),
+      onTileClick: (row, col, pointer) => this.onTilePointerDown(row, col, pointer),
       onDropComplete: (isPlayerMove) => this.onDropComplete(isPlayerMove),
     });
     this.statusEffectController = new StatusEffectController(
@@ -166,7 +166,7 @@ export class BattleController {
       this.effectManager
     );
     this.statusEffectController.setCallbacks({
-      onTileClick: (row, col) => this.onTileClick(row, col),
+      onTileClick: (row, col, pointer) => this.onTilePointerDown(row, col, pointer),
     });
     this.enemyTurnController = new EnemyTurnController(
       this.scene,
@@ -216,7 +216,7 @@ export class BattleController {
       setEnemyDefeated: (value) => { this.isEnemyDefeated = value; },
       updateHUD: () => this.updateHUD(),
       emitBattleEnd: (victory) => this.emitBattleEnd(victory),
-      onTileClick: (row, col) => this.onTileClick(row, col),
+      onTileClick: (row, col, pointer) => this.onTilePointerDown(row, col, pointer),
     });
     this.bonusExplosionHandler = new BonusExplosionHandler(
       this.scene,
@@ -239,7 +239,7 @@ export class BattleController {
       this.statusEffectController
     );
     this.matchProcessor.setCallbacks({
-      onTileClick: (row, col) => this.onTileClick(row, col),
+      onTileClick: (row, col, pointer) => this.onTilePointerDown(row, col, pointer),
       dropTiles: (isPlayerMove) => this.tileDropHandler.dropTiles(isPlayerMove),
       processChainBonusExplosions: (bonusOrbs, isPlayerMove) => this.bonusExplosionHandler.processChainBonusExplosions(bonusOrbs, isPlayerMove),
       getChainMultiplier: () => this.getChainMultiplier(),
@@ -287,8 +287,11 @@ export class BattleController {
     // 盤面フレームを描画
     this.boardView.createBoardFrame();
 
-    // 盤面を初期化
-    this.boardView.initBoard((row, col) => this.onTileClick(row, col));
+    // 盤面を初期化（フリック対応のためpointerも渡す）
+    this.boardView.initBoard((row, col, pointer) => this.onTilePointerDown(row, col, pointer));
+
+    // フリック検出用のsceneレベルイベントを登録
+    this.setupFlickListeners();
 
     // 初期マッチを除去
     this.tileDropHandler.removeInitialMatches();
@@ -308,10 +311,21 @@ export class BattleController {
   }
 
   /**
-   * タイルクリック処理（TileSwapHandlerに委譲）
+   * タイルポインターダウン処理（フリック対応）
    */
-  private onTileClick(row: number, col: number): void {
-    this.tileSwapHandler.onTileClick(row, col);
+  private onTilePointerDown(row: number, col: number, pointer?: Phaser.Input.Pointer): void {
+    if (pointer) {
+      this.tileSwapHandler.onTilePointerDown(row, col, pointer);
+    }
+  }
+
+  /**
+   * フリック検出用のsceneレベルイベントを登録
+   */
+  private setupFlickListeners(): void {
+    this.scene.input.on('pointerup', (pointer: Phaser.Input.Pointer) => {
+      this.tileSwapHandler.onPointerUp(pointer);
+    });
   }
 
   /**
@@ -444,6 +458,9 @@ export class BattleController {
     this.scene.game.events.off(GameBridgeEvents.RETIRE);
     this.scene.game.events.off(GameBridgeEvents.BATTLE_START_EFFECT_COMPLETE);
     this.scene.game.events.off(GameBridgeEvents.TUTORIAL_CLOSED);
+
+    // フリック検出用イベントリスナーを解除
+    this.scene.input.off('pointerup');
 
     this.battleHUD.cleanup();
 
