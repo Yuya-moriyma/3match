@@ -38,7 +38,7 @@ export class TileFactory {
     x: number,
     y: number,
     type: TileType,
-    onTileClick: (row: number, col: number) => void
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void
   ): Tile {
     const container = this.scene.add.container(x, y);
     const gemSize = this.getGemSize();
@@ -65,7 +65,7 @@ export class TileFactory {
 
     const tile: Tile = { row, col, type, actionType, container, isBonus: false };
 
-    hitArea.on('pointerdown', () => onTileClick(tile.row, tile.col));
+    hitArea.on('pointerdown', (pointer: Phaser.Input.Pointer) => onTileClick(tile.row, tile.col, pointer));
 
     return tile;
   }
@@ -80,7 +80,7 @@ export class TileFactory {
     y: number,
     type: TileType,
     direction: BonusDirection,
-    onTileClick: (row: number, col: number) => void
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void
   ): Tile {
     const container = this.scene.add.container(x, y);
     const gemSize = this.getGemSize();
@@ -113,7 +113,7 @@ export class TileFactory {
       bonusType: BonusType.LINE,
     };
 
-    hitArea.on('pointerdown', () => onTileClick(tile.row, tile.col));
+    hitArea.on('pointerdown', (pointer: Phaser.Input.Pointer) => onTileClick(tile.row, tile.col, pointer));
 
     return tile;
   }
@@ -127,7 +127,7 @@ export class TileFactory {
     x: number,
     y: number,
     type: TileType,
-    onTileClick: (row: number, col: number) => void
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void
   ): Tile {
     const container = this.scene.add.container(x, y);
     const gemSize = this.getGemSize();
@@ -158,7 +158,7 @@ export class TileFactory {
       bonusType: BonusType.BOMB,
     };
 
-    hitArea.on('pointerdown', () => onTileClick(tile.row, tile.col));
+    hitArea.on('pointerdown', (pointer: Phaser.Input.Pointer) => onTileClick(tile.row, tile.col, pointer));
 
     return tile;
   }
@@ -171,7 +171,7 @@ export class TileFactory {
     col: number,
     x: number,
     y: number,
-    onTileClick: (row: number, col: number) => void
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void
   ): Tile {
     const container = this.scene.add.container(x, y);
     const gemSize = this.getGemSize();
@@ -202,7 +202,7 @@ export class TileFactory {
       isBonus: false,
     };
 
-    hitArea.on('pointerdown', () => onTileClick(tile.row, tile.col));
+    hitArea.on('pointerdown', (pointer: Phaser.Input.Pointer) => onTileClick(tile.row, tile.col, pointer));
 
     return tile;
   }
@@ -216,7 +216,7 @@ export class TileFactory {
     col: number,
     x: number,
     y: number,
-    onTileClick: (row: number, col: number) => void
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void
   ): Tile {
     const container = this.scene.add.container(x, y);
     const gemSize = this.getGemSize();
@@ -247,7 +247,7 @@ export class TileFactory {
       isBonus: false,
     };
 
-    hitArea.on('pointerdown', () => onTileClick(tile.row, tile.col));
+    hitArea.on('pointerdown', (pointer: Phaser.Input.Pointer) => onTileClick(tile.row, tile.col, pointer));
 
     return tile;
   }

@@ -19,7 +19,7 @@ export class StatusEffectController {
   private effectManager: EffectManager;
 
   // 外部から注入されるコールバック
-  private onTileClick: (row: number, col: number) => void = () => {};
+  private onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void = () => {};
 
   constructor(
     scene: Phaser.Scene,
@@ -37,7 +37,7 @@ export class StatusEffectController {
    * コールバックを設定
    */
   setCallbacks(callbacks: {
-    onTileClick: (row: number, col: number) => void;
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void;
   }): void {
     this.onTileClick = callbacks.onTileClick;
   }

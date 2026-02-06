@@ -24,7 +24,7 @@ export class TileDropHandler {
   private lastDropSoundTime = 0;
 
   // 外部から注入されるコールバック
-  private onTileClick: (row: number, col: number) => void = () => {};
+  private onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void = () => {};
   private onDropComplete: (isPlayerMove: boolean) => void = () => {};
 
   constructor(
@@ -41,7 +41,7 @@ export class TileDropHandler {
    * コールバックを設定
    */
   setCallbacks(callbacks: {
-    onTileClick: (row: number, col: number) => void;
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void;
     onDropComplete: (isPlayerMove: boolean) => void;
   }): void {
     this.onTileClick = callbacks.onTileClick;

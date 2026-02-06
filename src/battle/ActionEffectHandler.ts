@@ -23,7 +23,7 @@ export interface ActionEffectCallbacks {
   setEnemyDefeated: (value: boolean) => void;
   updateHUD: () => void;
   emitBattleEnd: (victory: boolean) => void;
-  onTileClick: (row: number, col: number) => void;
+  onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void;
 }
 
 /**

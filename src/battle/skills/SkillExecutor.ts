@@ -43,7 +43,7 @@ export class SkillExecutor {
    */
   execute(
     character: Character,
-    onTileClick: (row: number, col: number) => void
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void
   ): SkillExecutionResult {
     switch (character.skill.effectType) {
       case SkillEffectType.CREATE_BOMB:
@@ -64,7 +64,7 @@ export class SkillExecutor {
    */
   private executeCreateBomb(
     character: Character,
-    onTileClick: (row: number, col: number) => void
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void
   ): SkillExecutionResult {
     const count = character.skill.effectParams?.count ?? 1;
 

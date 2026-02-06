@@ -65,7 +65,7 @@ export class BoardView {
   /**
    * 盤面を初期化（タイルを生成して配置）
    */
-  initBoard(onTileClick: (row: number, col: number) => void): void {
+  initBoard(onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void): void {
     this.boardModel.initialize();
     for (let row = 0; row < BOARD_ROWS; row++) {
       for (let col = 0; col < BOARD_COLS; col++) {
@@ -170,7 +170,7 @@ export class BoardView {
     col: number,
     type: TileType,
     duration: number,
-    onTileClick: (row: number, col: number) => void,
+    onTileClick: (row: number, col: number, pointer?: Phaser.Input.Pointer) => void,
     onComplete?: () => void
   ): Tile {
     const offset = this.boardModel.getBoardOffset();
