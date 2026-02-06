@@ -170,4 +170,19 @@ export class BoardModel {
   getRawBoard(): readonly (readonly (Tile | null)[])[] {
     return this.board;
   }
+
+  /**
+   * ワールド座標から盤面の行・列を取得
+   * 盤面外の場合は null を返す
+   */
+  getRowColFromWorldPosition(x: number, y: number): { row: number; col: number } | null {
+    const col = Math.floor((x - this._offsetX) / TILE_SIZE);
+    const row = Math.floor((y - this._offsetY) / TILE_SIZE);
+
+    if (!this.isValidPosition(row, col)) {
+      return null;
+    }
+
+    return { row, col };
+  }
 }
